@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador CPF JS</title>
+</head>
+<body>
+    <h1>Gerador de CPF</h1>
+    <button onclick="gerarCPF()">Gerar CPF</button>
+    <p id="cpf"></p>
+    <script>
+        //funca para gerar cpf validor
+    
+        function gerarCPF(){
+            let cpf = "";
+            let numeros = [];
+            let resto = 0;
+            let soma = 0;
+            let digito = 0;
+            let digito2 = 0;
+            for(let i = 0; i < 9; i++){
+                numeros[i] = Math.floor(Math.random() * 10);
+            }
+            for(let i = 0; i < 9; i++){
+                soma += numeros[i] * (10 - i);
+            }
+            resto = soma % 11;
+            if(resto < 2){
+                digito = 0;
+            }else{
+                digito = 11 - resto;
+            }
+            numeros[9] = digito;
+            soma = 0;
+            for(let i = 0; i < 10; i++){
+                soma += numeros[i] * (11 - i);
+            }
+            resto = soma % 11;
+            if(resto < 2){
+                digito2 = 0;
+            }else{
+                digito2 = 11 - resto;
+            }
+            numeros[10] = digito2;
+            for(let i = 0; i < 11; i++){
+                cpf += numeros[i];
+            }
+            document.getElementById("cpf").innerHTML = cpf;
+        }
+    </script>
+
+</body>
+</html>
